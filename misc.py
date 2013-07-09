@@ -2,10 +2,6 @@ from UserDict import IterableUserDict
 import collections
 
 
-def tupperware_from_kwargs(**kwargs):
-    return tupperware(kwargs)
-
-
 def tupperware(mapping):
     """ Convert mappings to 'tupperwares' recursively.
 
@@ -71,6 +67,7 @@ def tupperware(mapping):
 def namedtuple_wrapper(**kwargs):
     namedtuple = collections.namedtuple('Tupperware', kwargs)
     return namedtuple(**kwargs)
+
 
 class ProtectedDict(IterableUserDict):
     """ A class that exists just to tell `tupperware` not to eat it.
