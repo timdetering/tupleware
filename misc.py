@@ -1,6 +1,5 @@
 from UserDict import IterableUserDict
 import collections
-import re
 
 
 def tupperware_from_kwargs(**kwargs):
