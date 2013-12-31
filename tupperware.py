@@ -23,7 +23,7 @@ def tupperware(mapping):
 
         * Storing data (like fixtures) in a structured way, in Python code
         (data whose initial definition reads nicely like JSON). You could do
-        this with dictionaries, but this solution is immutable, and its
+        this with dictionaries, but namedtuples are immutable, and its
         dotted notation is arguably clearer in many contexts.
 
     .. doctest::
