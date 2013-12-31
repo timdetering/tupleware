@@ -1,6 +1,12 @@
 from UserDict import IterableUserDict
 import collections
 
+__author__ = "github.com/hangtwenty"
+
+
+def tupperware_from_kwargs(**kwargs):
+    return tupperware(kwargs)
+
 
 def tupperware(mapping):
     """ Convert mappings to 'tupperwares' recursively.
