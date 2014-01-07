@@ -1,7 +1,8 @@
 from UserDict import IterableUserDict
 import collections
 
-__author__ = 'mfloering'
+
+__author__ = 'github.com/hangtwenty'
 
 
 def tupperware(mapping):
@@ -78,6 +79,7 @@ class ProtectedDict(IterableUserDict):
     actually want a dictionary in there? This will stop it. Just do
     ProtectedDict({...}) or ProtectedDict(kwarg=foo).
     """
+
 
 def tupperware_from_kwargs(**kwargs):
     return tupperware(kwargs)
