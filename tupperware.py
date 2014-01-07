@@ -1,11 +1,7 @@
 from UserDict import IterableUserDict
 import collections
 
-__author__ = "github.com/hangtwenty"
-
-
-def tupperware_from_kwargs(**kwargs):
-    return tupperware(kwargs)
+__author__ = 'mfloering'
 
 
 def tupperware(mapping):
@@ -18,13 +14,13 @@ def tupperware(mapping):
 
     Use cases:
 
-        * Fake objects (useful for dependency injection when a Mock is actually
-        more complex than your requirements call for)
+        * Fake objects (useful for dependency injection when you're making
+         fakes/stubs that are simpler than proper mocks)
 
         * Storing data (like fixtures) in a structured way, in Python code
         (data whose initial definition reads nicely like JSON). You could do
-        this with dictionaries, but namedtuples are immutable, and its
-        dotted notation is arguably clearer in many contexts.
+        this with dictionaries, but namedtuples are immutable, and their
+        dotted notation can be clearer in some contexts.
 
     .. doctest::
 
@@ -66,13 +62,13 @@ def tupperware(mapping):
             not isinstance(mapping, ProtectedDict)):
         for key, value in mapping.iteritems():
             mapping[key] = tupperware(value)
-        return my_namedtuple(**mapping)
+        return namedtuple_from_mapping(mapping)
     return mapping
 
 
-def my_namedtuple(**kwargs):
-    my_namedtuple = collections.namedtuple('Tupperware', kwargs.iterkeys())
-    return my_namedtuple(**kwargs)
+def namedtuple_from_mapping(mapping, name="Tupperware"):
+    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
+    return this_namedtuple_maker(**mapping)
 
 
 class ProtectedDict(IterableUserDict):
@@ -82,3 +78,6 @@ class ProtectedDict(IterableUserDict):
     actually want a dictionary in there? This will stop it. Just do
     ProtectedDict({...}) or ProtectedDict(kwarg=foo).
     """
+
+def tupperware_from_kwargs(**kwargs):
+    return tupperware(kwargs)
