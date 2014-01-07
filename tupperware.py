@@ -66,13 +66,13 @@ def tupperware(mapping):
             not isinstance(mapping, ProtectedDict)):
         for key, value in mapping.iteritems():
             mapping[key] = tupperware(value)
-        return namedtuple_wrapper(**mapping)
+        return my_namedtuple(**mapping)
     return mapping
 
 
-def namedtuple_wrapper(**kwargs):
-    namedtuple = collections.namedtuple('Tupperware', kwargs)
-    return namedtuple(**kwargs)
+def my_namedtuple(**kwargs):
+    my_namedtuple = collections.namedtuple('Tupperware', kwargs.iterkeys())
+    return my_namedtuple(**kwargs)
 
 
 class ProtectedDict(IterableUserDict):
