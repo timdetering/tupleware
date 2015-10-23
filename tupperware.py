@@ -60,6 +60,8 @@ def tupperware(mapping, name="Tupperware"):
         for key, value in mapping.iteritems():
             mapping[key] = tupperware(value, name)
         return namedtuple_from_mapping(mapping, name)
+    elif isinstance(mapping, list):
+        return [tupperware(item, name) for item in mapping]
     return mapping
 
 
