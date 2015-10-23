@@ -1,4 +1,3 @@
-from UserDict import IterableUserDict
 import collections
 
 
@@ -69,7 +68,7 @@ def namedtuple_from_mapping(mapping, name):
     return this_namedtuple_maker(**mapping)
 
 
-class ProtectedDict(IterableUserDict):
+class ProtectedDict(dict):
     """ A class that exists just to tell `tupperware` not to eat it.
 
     `tupperware` eats all dicts you give it, recursively; but what if you
