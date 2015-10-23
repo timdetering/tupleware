@@ -2,10 +2,7 @@ from UserDict import IterableUserDict
 import collections
 
 
-__author__ = 'github.com/hangtwenty'
-
-
-def tupperware(mapping):
+def tupperware(mapping, name="Tupperware"):
     """ Convert mappings to 'tupperwares' recursively.
 
     Lets you use dicts like they're JavaScript Object Literals (~=JSON)...
@@ -62,12 +59,12 @@ def tupperware(mapping):
     if (isinstance(mapping, collections.Mapping) and
             not isinstance(mapping, ProtectedDict)):
         for key, value in mapping.iteritems():
-            mapping[key] = tupperware(value)
-        return namedtuple_from_mapping(mapping)
+            mapping[key] = tupperware(value, name)
+        return namedtuple_from_mapping(mapping, name)
     return mapping
 
 
-def namedtuple_from_mapping(mapping, name="Tupperware"):
+def namedtuple_from_mapping(mapping, name):
     this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
     return this_namedtuple_maker(**mapping)
 
@@ -83,3 +80,20 @@ class ProtectedDict(IterableUserDict):
 
 def tupperware_from_kwargs(**kwargs):
     return tupperware(kwargs)
+
+
+if __name__ == "__main__":
+    t = tupperware({
+        'foo': 'bar',
+        'baz': {'qux': 'quux'},
+        'tito': {
+            'tata': 'tutu',
+            'totoro': 'tots',
+            'frobnicator': ['this', 'is', 'not', 'a', 'mapping']
+        },
+        'alist': [
+            {'one': '1', 'a': 'A'},
+            {'two': '2', 'b': 'B'},
+        ]
+    }, "MyTuple")
+    print(t)
