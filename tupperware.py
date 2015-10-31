@@ -66,8 +66,8 @@ def tupperware(mapping, name="Tupperware"):
 
 
 def namedtuple_from_mapping(mapping, name):
-    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
-    return this_namedtuple_maker(**mapping)
+    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys(), verbose=True)
+    return (this_namedtuple_maker, this_namedtuple_maker(**mapping))
 
 
 class ProtectedDict(dict):
