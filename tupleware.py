@@ -1,8 +1,8 @@
 import collections
 
 
-def tupperware(mapping, name="Tupperware"):
-    """ Convert mappings to 'tupperwares' recursively.
+def tupleware(mapping, name="Tupleware"):
+    """ Convert mappings to 'tupleware' recursively.
 
     Lets you use dicts like they're JavaScript Object Literals (~=JSON)...
     It recursively turns mappings (dictionaries) into namedtuples.
@@ -21,7 +21,7 @@ def tupperware(mapping, name="Tupperware"):
 
     .. doctest::
 
-        >>> t = tupperware({
+        >>> t = tupleware({
         ...     'foo': 'bar',
         ...     'baz': {'qux': 'quux'},
         ...     'tito': {
@@ -58,16 +58,16 @@ def tupperware(mapping, name="Tupperware"):
     if (isinstance(mapping, collections.Mapping) and
             not isinstance(mapping, ProtectedDict)):
         for key, value in mapping.iteritems():
-            mapping[key] = tupperware(value, name)
+            mapping[key] = tupleware(value, name)
         return namedtuple_from_mapping(mapping, name)
     elif isinstance(mapping, list):
-        return [tupperware(item, name) for item in mapping]
+        return [tupleware(item, name) for item in mapping]
     return mapping
 
 
 def namedtuple_from_mapping(mapping, name):
-    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys(), verbose=True)
-    return (this_namedtuple_maker, this_namedtuple_maker(**mapping))
+    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
+    return this_namedtuple_maker, this_namedtuple_maker(**mapping)
 
 
 class ProtectedDict(dict):
@@ -80,11 +80,11 @@ class ProtectedDict(dict):
 
 
 def tupperware_from_kwargs(**kwargs):
-    return tupperware(kwargs)
+    return tupleware(kwargs)
 
 
 if __name__ == "__main__":
-    t = tupperware({
+    t = tupleware({
         'foo': 'bar',
         'baz': {'qux': 'quux'},
         'tito': {
