@@ -54,20 +54,18 @@ def tupleware(mapping, name="Tupleware"):
         If argument is not a mapping, it just returns it (this enables the
         recursion).
     """
-
-    if (isinstance(mapping, collections.Mapping) and
-            not isinstance(mapping, ProtectedDict)):
+    if isinstance(mapping, collections.Mapping) and not isinstance(mapping, ProtectedDict):
         for key, value in mapping.iteritems():
-            mapping[key] = tupleware(value, name)
-        return namedtuple_from_mapping(mapping, name)
+            mapping[key] = tupleware(value, key)
+        return _namedtuple_from_mapping(mapping, name)
     elif isinstance(mapping, list):
         return [tupleware(item, name) for item in mapping]
     return mapping
 
 
-def namedtuple_from_mapping(mapping, name):
+def _namedtuple_from_mapping(mapping, name):
     this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
-    return this_namedtuple_maker, this_namedtuple_maker(**mapping)
+    return this_namedtuple_maker(**mapping)
 
 
 class ProtectedDict(dict):

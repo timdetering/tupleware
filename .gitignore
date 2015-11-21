@@ -1,6 +1,11 @@
+# To update run:
+#    curl -L https://gist.github.com/timdetering/bc1bccb602bd8a6a71b6/raw/ > ./.gitignore.gist
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
@@ -56,9 +61,11 @@ docs/_build/
 # PyBuilder
 target/
 
-# PyCharm
+# PyCharm project files
+.idea/dictionaries
 .idea/misc.xml
 .idea/workspace.xml
 
-# Mergetool
+# Diff / merge tool files:
+*.bak
 *.orig
